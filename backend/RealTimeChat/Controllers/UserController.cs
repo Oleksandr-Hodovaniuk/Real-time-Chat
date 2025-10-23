@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RealTimeChat.Application.Interfaces;
+using RealTimeChat.Application.Users.Queries;
 
 namespace RealTimeChat.Controllers;
 
@@ -11,14 +12,11 @@ public class UserController : BaseController
         _unitOfWork = unitOfWork;   
     }
 
-    [HttpGet]
-    public async Task<IActionResult> GetUsers(CancellationToken cancellationToken)
+    [HttpGet("{userId}")]
+    public async Task<IActionResult> GetUserById(string userId, CancellationToken cancellationToken)
     {
-        var users = await _unitOfWork.Users.GetAllAsync(includeProperties: "Messages", cancellationToken: cancellationToken);
-        foreach (var user in users)
-        {
-            Console.WriteLine($"User: {user.Id} - {user.Username} - {user.PasswordHash}");
-        }
-        return Ok();
+        var user = await Mediator.Send(new GetUserByIdQuery(userId), cancellationToken);
+
+        return Ok(user);
     }
 }

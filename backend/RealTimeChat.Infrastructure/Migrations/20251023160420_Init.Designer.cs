@@ -12,8 +12,8 @@ using RealTimeChat.Infrastructure.Persistence;
 namespace RealTimeChat.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20251023150902_test")]
-    partial class test
+    [Migration("20251023160420_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

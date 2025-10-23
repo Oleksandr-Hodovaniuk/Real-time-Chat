@@ -1,4 +1,5 @@
-﻿using RealTimeChat.Extensions;
+﻿using RealTimeChat.Application.Users.Queries;
+using RealTimeChat.Extensions;
 
 namespace RealTimeChat;
 

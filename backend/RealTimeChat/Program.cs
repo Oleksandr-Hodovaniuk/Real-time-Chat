@@ -1,5 +1,6 @@
 using DotNetEnv;
 using RealTimeChat;
+using RealTimeChat.Application;
 using RealTimeChat.Extensions;
 using RealTimeChat.Infrastructure;
 
@@ -13,6 +14,8 @@ builder.Configuration.AddEnvironmentVariables();
 builder.Services.AddApiServices();
 
 builder.Services.AddInfrastructureServices(builder.Configuration);
+
+builder.Services.AddApplicationServices();
 
 var app = builder.Build();
 
