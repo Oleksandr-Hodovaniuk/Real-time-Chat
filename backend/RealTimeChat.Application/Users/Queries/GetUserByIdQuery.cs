@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using RealTimeChat.Application.Exceptions;
 using RealTimeChat.Application.Interfaces;
 using RealTimeChat.Domain.Dtos;
 
@@ -21,7 +22,7 @@ internal class GetUserByIdHandler : IRequestHandler<GetUserByIdQuery, UserDto>
 
         var user = await _unitOfWork.Users.GetAsync(u => u.Id.ToString() == request.UserId, cancellationToken: cancellationToken);
         if (user == null)
-            throw new Exception("User with this id doesn't exist!");
+            throw new NotFoundException("User with this id doesn't exist!");
         
         var userDto = _mapper.Map<UserDto>(user);
 

@@ -3,6 +3,7 @@ using RealTimeChat;
 using RealTimeChat.Application;
 using RealTimeChat.Extensions;
 using RealTimeChat.Infrastructure;
+using RealTimeChat.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +21,8 @@ builder.Services.AddApplicationServices();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 await app.InitialiseDatabaseAsync();
 
