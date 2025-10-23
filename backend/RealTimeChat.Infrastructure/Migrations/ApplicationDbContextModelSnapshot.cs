@@ -31,8 +31,9 @@ namespace RealTimeChat.Infrastructure.Migrations
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("SentimentType")
-                        .HasColumnType("int");
+                    b.Property<string>("SentimentType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Text")
                         .IsRequired()

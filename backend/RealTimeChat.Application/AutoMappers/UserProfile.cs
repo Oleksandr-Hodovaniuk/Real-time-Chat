@@ -19,5 +19,11 @@ internal class UserProfile : Profile
                 opt.MapFrom(src => src.Username))
             .ForMember(dest => dest.PasswordHash, opt =>
                 opt.MapFrom(src => src.Password));
+
+        CreateMap<UserLoginDto, User>()
+            .ForMember(dest => dest.Username, opt =>
+                opt.MapFrom(src => src.Username))
+            .ForMember(dest => dest.PasswordHash, opt =>
+                opt.MapFrom(src => src.Password));
     }
 }

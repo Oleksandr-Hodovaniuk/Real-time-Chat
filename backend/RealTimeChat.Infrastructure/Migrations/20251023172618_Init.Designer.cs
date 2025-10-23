@@ -12,7 +12,7 @@ using RealTimeChat.Infrastructure.Persistence;
 namespace RealTimeChat.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20251023160420_Init")]
+    [Migration("20251023172618_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -34,8 +34,9 @@ namespace RealTimeChat.Infrastructure.Migrations
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("SentimentType")
-                        .HasColumnType("int");
+                    b.Property<string>("SentimentType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Text")
                         .IsRequired()

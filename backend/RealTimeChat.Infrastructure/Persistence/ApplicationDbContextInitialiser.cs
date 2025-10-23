@@ -58,14 +58,14 @@ internal class ApplicationDbContextInitialiser : IApplicationDbContextInitialise
                 {
                     Id = Guid.NewGuid(),
                     Text = "Did you finish the project?",
-                    Created = DateTime.UtcNow.AddSeconds(20),
+                    Created = DateTime.UtcNow.AddMinutes(2),
                     SentimentType = SentimentTypeEnum.Neutral
                 },
                 new Message
                 {
                     Id = Guid.NewGuid(),
-                    Text = "Ok, finish your task and send me a report.",
-                    Created = DateTime.UtcNow.AddSeconds(40),
+                    Text = "Ok finish your task and let me know.",
+                    Created = DateTime.UtcNow.AddMinutes(4),
                     SentimentType = SentimentTypeEnum.Mixed
                 }
             }
@@ -82,13 +82,13 @@ internal class ApplicationDbContextInitialiser : IApplicationDbContextInitialise
                 {
                     Id = Guid.NewGuid(),
                     Text = "I'm fine, thank you!",
-                    Created = DateTime.UtcNow.AddSeconds(10)
+                    Created = DateTime.UtcNow.AddMinutes(1)
                 },
                 new Message
                 {
                     Id = Guid.NewGuid(),
                     Text = "No, i have some serious problems!",
-                    Created = DateTime.UtcNow.AddSeconds(30),
+                    Created = DateTime.UtcNow.AddMinutes(3),
                     SentimentType = SentimentTypeEnum.Negative
                 }
             }

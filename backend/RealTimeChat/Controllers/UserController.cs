@@ -25,9 +25,15 @@ public class UserController : BaseController
     [HttpPost("register")]
     public async Task<IActionResult> RegisterUser([FromBody] UserRegisterDto dto, CancellationToken cancellationToken)
     {
-        var user = await Mediator.Send(new RegisterUserQuery(dto), cancellationToken);
+        var user = await Mediator.Send(new RegisterUserCommand(dto), cancellationToken);
 
         return Ok(user);
     }
 
+    [HttpPost("login")]
+    public async Task<IActionResult> LoginUser([FromBody] UserLoginDto dto, CancellationToken cancellationToken)
+    {
+        var user = await Mediator.Send(new LoginUserCommand(dto), cancellationToken);
+        return Ok(user);
+    }
 }

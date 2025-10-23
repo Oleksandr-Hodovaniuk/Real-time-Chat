@@ -14,7 +14,9 @@ internal class MessageConfiguration : IEntityTypeConfiguration<Message>
 
         builder.Property(m => m.Text).IsRequired();
 
-        builder.Property(m => m.SentimentType).IsRequired();
+        builder.Property(m => m.SentimentType)
+            .HasConversion<string>()
+            .IsRequired();
 
         builder.Property(m => m.Created).IsRequired();
         
