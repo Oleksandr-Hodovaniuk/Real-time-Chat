@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FluentValidation;
+using Microsoft.AspNetCore.Mvc;
 using RealTimeChat.Application.Interfaces;
 using RealTimeChat.Application.Users.Commands;
 using RealTimeChat.Application.Users.Queries;
@@ -8,10 +9,12 @@ namespace RealTimeChat.Controllers;
 
 public class UserController : BaseController
 {
-    private readonly IUnitOfWork _unitOfWork;
-    public UserController(IUnitOfWork unitOfWork)
+    private readonly IValidator<UserRegisterDto> _registerValidator;
+    private readonly IValidator<UserLoginDto> _loginValidator;
+    public UserController(IValidator<UserRegisterDto> registerValidator, IValidator<UserLoginDto> loginValidator)
     {
-        _unitOfWork = unitOfWork;   
+        _registerValidator = registerValidator;
+        _loginValidator = loginValidator;
     }
 
     [HttpGet("{userId}")]
@@ -25,6 +28,12 @@ public class UserController : BaseController
     [HttpPost("register")]
     public async Task<IActionResult> RegisterUser([FromBody] UserRegisterDto dto, CancellationToken cancellationToken)
     {
+        var validationResult = await _registerValidator.ValidateAsync(dto, cancellationToken);
+        if (!validationResult.IsValid)
+        {
+            return BadRequest(validationResult.Errors.Select(e => e.ErrorMessage));
+        }
+
         var user = await Mediator.Send(new RegisterUserCommand(dto), cancellationToken);
 
         return Ok(user);
@@ -33,7 +42,14 @@ public class UserController : BaseController
     [HttpPost("login")]
     public async Task<IActionResult> LoginUser([FromBody] UserLoginDto dto, CancellationToken cancellationToken)
     {
+        var validationResult = await _loginValidator.ValidateAsync(dto, cancellationToken);
+        if (!validationResult.IsValid)
+        {
+            return BadRequest(validationResult.Errors.Select(e => e.ErrorMessage));
+        }
+
         var user = await Mediator.Send(new LoginUserCommand(dto), cancellationToken);
+
         return Ok(user);
     }
 }
