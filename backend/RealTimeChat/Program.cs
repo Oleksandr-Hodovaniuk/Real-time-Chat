@@ -1,6 +1,7 @@
 using DotNetEnv;
 using RealTimeChat;
 using RealTimeChat.Extensions;
+using RealTimeChat.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,9 +12,13 @@ builder.Configuration.AddEnvironmentVariables();
 
 builder.Services.AddApiServices();
 
+builder.Services.AddInfrastructureServices(builder.Configuration);
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+
+await app.InitialiseDatabaseAsync();
 
 app.UseSwaggerDocumentation();
 
