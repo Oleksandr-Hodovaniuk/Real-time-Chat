@@ -33,6 +33,7 @@ public class ExceptionHandlingMiddleware
         var (code, message) = exception switch
         {
             NotFoundException => (HttpStatusCode.NotFound, exception.Message),
+            BusinessException => (HttpStatusCode.BadRequest, exception.Message),
             _ => (HttpStatusCode.InternalServerError, "An unexpected error occurred!")
         };
 

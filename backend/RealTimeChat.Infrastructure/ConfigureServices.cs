@@ -24,7 +24,8 @@ public static class ConfigureServices
         services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(connectionString));
 
-        services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
+        services.AddScoped<IApplicationDbContext>(provider =>
+           provider.GetRequiredService<ApplicationDbContext>());
 
         services.AddScoped<IApplicationDbContextInitialiser, ApplicationDbContextInitialiser>();
 

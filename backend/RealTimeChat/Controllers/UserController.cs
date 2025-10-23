@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RealTimeChat.Application.Interfaces;
+using RealTimeChat.Application.Users.Commands;
 using RealTimeChat.Application.Users.Queries;
+using RealTimeChat.Domain.Dtos;
 
 namespace RealTimeChat.Controllers;
 
@@ -19,4 +21,13 @@ public class UserController : BaseController
 
         return Ok(user);
     }
+
+    [HttpPost("register")]
+    public async Task<IActionResult> RegisterUser([FromBody] UserRegisterDto dto, CancellationToken cancellationToken)
+    {
+        var user = await Mediator.Send(new RegisterUserQuery(dto), cancellationToken);
+
+        return Ok(user);
+    }
+
 }
