@@ -12,11 +12,11 @@ builder.Configuration.AddEnvironmentVariables();
 
 // Add services to the container.
 
-builder.Services.AddApiServices();
+builder.Services.AddApplicationServices();
 
 builder.Services.AddInfrastructureServices(builder.Configuration);
 
-builder.Services.AddApplicationServices();
+builder.Services.AddApiServices();
 
 var app = builder.Build();
 
@@ -24,13 +24,19 @@ var app = builder.Build();
 
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 
-await app.InitialiseDatabaseAsync();
+app.UseHttpsRedirection();
+
+app.UseRouting();
+
+app.UseCors("CorsPolicy");
+
+app.UseAuthorization();
 
 app.UseSwaggerDocumentation();
 
-app.UseHttpsRedirection();
+await app.InitialiseDatabaseAsync();
 
-app.UseAuthorization();
+app.MapHub<RealTimeChat.Hubs.ChatHub>("/chatHub");
 
 app.MapControllers();
 

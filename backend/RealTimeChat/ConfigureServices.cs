@@ -1,5 +1,4 @@
-﻿using RealTimeChat.Application.Users.Queries;
-using RealTimeChat.Extensions;
+﻿using RealTimeChat.Extensions;
 
 namespace RealTimeChat;
 
@@ -10,6 +9,10 @@ public static class ConfigureServices
         services.AddControllers();
 
         services.AddSwaggerDocumentation();
+
+        services.AddSignalR();
+
+        services.AddAppCors();
 
         return services;
     }
