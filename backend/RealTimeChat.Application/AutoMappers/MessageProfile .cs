@@ -16,6 +16,13 @@ internal class MappingProfile : Profile
             .ForMember(dest => dest.SentimentType, opt =>
                 opt.MapFrom(src => src.SentimentType.ToString()))
             .ForMember(dest => dest.Created, opt =>
-                opt.MapFrom(src => src.Created.ToString("HH:mm dd-MM-yyyy ")));
+                opt.MapFrom(src => src.Created.ToString("HH:mm dd-MM-yyyy ")))
+            .ReverseMap();
+
+        CreateMap<ChatMessageDto, Message>()
+            .ForMember(dest => dest.Text, opt =>
+                opt.MapFrom(src => src.Text))
+            .ForMember(dest => dest.Created, opt =>
+                opt.MapFrom(src => DateTime.Now));
     }
 }
