@@ -9,6 +9,8 @@ internal class MappingProfile : Profile
     public MappingProfile()
     {
         CreateMap<Message, MessageDto>()
+            .ForMember(dest => dest.UserId, opt =>
+                opt.MapFrom(src => src.UserId.ToString()))
             .ForMember(dest => dest.Text, opt =>
                 opt.MapFrom(src => src.Text))
             .ForMember(dest => dest.SentimentType, opt =>
