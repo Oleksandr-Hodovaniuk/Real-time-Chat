@@ -1,9 +1,8 @@
 ﻿using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
-using RealTimeChat.Application.Interfaces;
 using RealTimeChat.Application.Users.Commands;
 using RealTimeChat.Application.Users.Queries;
-using RealTimeChat.Domain.Dtos;
+using RealTimeChat.Application.Dtos;
 
 namespace RealTimeChat.Controllers;
 

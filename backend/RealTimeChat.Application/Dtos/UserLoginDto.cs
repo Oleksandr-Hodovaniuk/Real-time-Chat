@@ -1,4 +1,4 @@
-﻿namespace RealTimeChat.Domain.Dtos;
+﻿namespace RealTimeChat.Application.Dtos;
 
 public class UserLoginDto
 {

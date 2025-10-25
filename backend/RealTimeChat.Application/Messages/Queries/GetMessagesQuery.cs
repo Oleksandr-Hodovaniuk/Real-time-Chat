@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using RealTimeChat.Application.Interfaces;
-using RealTimeChat.Domain.Dtos;
+using RealTimeChat.Application.Dtos;
 
 namespace RealTimeChat.Application.Messages.Queries;
 

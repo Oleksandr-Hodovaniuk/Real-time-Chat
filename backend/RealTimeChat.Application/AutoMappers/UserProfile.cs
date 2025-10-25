@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using RealTimeChat.Domain.Dtos;
+using RealTimeChat.Application.Dtos;
 using RealTimeChat.Domain.Entities;
 
 namespace RealTimeChat.Application.AutoMappers;

@@ -1,6 +1,4 @@
-﻿using RealTimeChat.Domain.Enums;
-
-namespace RealTimeChat.Domain.Dtos;
+﻿namespace RealTimeChat.Application.Dtos;
 
 public class MessageDto
 {

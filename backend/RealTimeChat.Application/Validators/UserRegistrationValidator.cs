@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using RealTimeChat.Domain.Dtos;
+using RealTimeChat.Application.Dtos;
 
 namespace RealTimeChat.Application.Validators;
 

@@ -1,9 +1,8 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.SignalR;
 using RealTimeChat.Application.Exceptions;
 using RealTimeChat.Application.Interfaces;
-using RealTimeChat.Domain.Dtos;
+using RealTimeChat.Application.Dtos;
 using RealTimeChat.Domain.Entities;
 using RealTimeChat.Domain.Enums;
 

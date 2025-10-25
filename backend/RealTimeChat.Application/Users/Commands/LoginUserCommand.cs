@@ -3,7 +3,7 @@ using MediatR;
 using Microsoft.AspNetCore.Identity;
 using RealTimeChat.Application.Exceptions;
 using RealTimeChat.Application.Interfaces;
-using RealTimeChat.Domain.Dtos;
+using RealTimeChat.Application.Dtos;
 using RealTimeChat.Domain.Entities;
 
 namespace RealTimeChat.Application.Users.Commands;
