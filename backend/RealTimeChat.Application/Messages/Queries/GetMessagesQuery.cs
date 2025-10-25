@@ -20,7 +20,7 @@ internal class GetMessagesHandler : IRequestHandler<GetMessagesQuery, List<Messa
     {
         using var transaction = await _unitOfWork.BeginTransactionAsync(cancellationToken);
 
-        var messages = await _unitOfWork.Messages.GetAllAsync(cancellationToken: cancellationToken);
+        var messages = await _unitOfWork.Messages.GetAllAsync(includeProperties: "User",cancellationToken: cancellationToken);
         
         if (messages == null || !messages.Any())
             return new List<MessageDto>();
