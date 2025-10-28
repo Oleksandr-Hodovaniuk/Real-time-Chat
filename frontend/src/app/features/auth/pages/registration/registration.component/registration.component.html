@@ -19,7 +19,7 @@
       <input type="password" formControlName="password" class="w-full border p-2 rounded border-gray-300" />
       <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched" class="text-red-500 text-sm">
         <div *ngIf="registerForm.get('password')?.errors?.['required']">Field is required.</div>
-        <div *ngIf="registerForm.get('password')?.errors?.['minlength']">Minimum 6 characters.</div>
+        <div *ngIf="registerForm.get('password')?.errors?.['minlength']">Password must must be between 8 and 40 characters.</div>
       </div>
     </div>
 

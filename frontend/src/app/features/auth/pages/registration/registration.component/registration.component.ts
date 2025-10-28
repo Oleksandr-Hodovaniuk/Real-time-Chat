@@ -1,23 +1,26 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { UserRegister } from './Models/user.register.model';
-import { AuthService } from './Services/auth.service';
 import { Router } from '@angular/router';
+import { UserRegisterModel } from '../../../models/user.register.model';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-register',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './register.component.html',
+  templateUrl: './registration.component.html',
 })
-export class RegisterComponent {
-  registerForm: FormGroup;
+export class RegistrationComponent {
+  registerForm!: FormGroup;
 
-  constructor(private fb: FormBuilder,
-     private authService: AuthService,
-     private router: Router)
-  {
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router)
+  {}
+
+  ngOnInit() {
     this.registerForm = this.fb.group({
       username: ['', [
         Validators.required,
@@ -34,7 +37,7 @@ export class RegisterComponent {
       confirmPassword: ['', [Validators.required]]
     }, { validators: this.passwordMatchValidator });
   }
-
+  
   passwordMatchValidator(form: FormGroup) {
     const password = form.get('password')?.value;
     const confirmPassword = form.get('confirmPassword')?.value;
@@ -47,7 +50,7 @@ export class RegisterComponent {
       return;
     }
 
-    const user: UserRegister = this.registerForm.value;
+    const user: UserRegisterModel = this.registerForm.value;
 
     this.authService.register(user).subscribe({
       next: (res) => {
