@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { UserRegisterModel } from '../../models/user.register.model';
 import { AuthService } from '../../services/auth.service';
+import { ModalService } from '../../../../shared/services/modal.service';
 
 @Component({
   selector: 'app-register',
@@ -17,7 +18,7 @@ export class RegistrationComponent {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router)
+    private modalService: ModalService)
   {}
 
   ngOnInit() {
@@ -57,8 +58,7 @@ export class RegistrationComponent {
         localStorage.setItem('user', JSON.stringify(res));
       },
       error: (err) => {
-        console.error(err.error.error);
-        alert("Sorry, something went wrong!");
+        this.modalService.open('Registration Error', err.error.error || 'Sorry, something went wrong!');
       }
     });
   }

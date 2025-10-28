@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { UserRegisterModel } from '../../models/user.register.model';
 import { AuthService } from '../../services/auth.service';
+import { ModalService } from '../../../../shared/services/modal.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,7 @@ export class LoginComponent {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router)
+    private modalService: ModalService)
   {}
 
   ngOnInit() {
@@ -47,15 +48,14 @@ export class LoginComponent {
 
     this.authService.login(user).subscribe({
       next: (res) => {
-        console.log(res);
         localStorage.setItem('user', JSON.stringify(res));
       },
       error: (err) => {     
        if (err.status === 404 || err.status === 400) {
-          alert("Invalid username or password.");
+          this.modalService.open('Login Error', err.error.error || 'Sorry, something went wrong!');
         }
         else {
-          alert("Sorry, something went wrong!");
+          this.modalService.open('Login Error', 'Sorry, something went wrong!');
         }
       }
     });
