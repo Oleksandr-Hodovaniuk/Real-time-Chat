@@ -6,11 +6,11 @@ using RealTimeChat.Application.Dtos;
 
 namespace RealTimeChat.Controllers;
 
-public class UserController : BaseController
+public class AuthController : BaseController
 {
     private readonly IValidator<UserRegisterDto> _registerValidator;
     private readonly IValidator<UserLoginDto> _loginValidator;
-    public UserController(IValidator<UserRegisterDto> registerValidator, IValidator<UserLoginDto> loginValidator)
+    public AuthController(IValidator<UserRegisterDto> registerValidator, IValidator<UserLoginDto> loginValidator)
     {
         _registerValidator = registerValidator;
         _loginValidator = loginValidator;

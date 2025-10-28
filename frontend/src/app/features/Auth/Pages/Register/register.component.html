@@ -1,0 +1,43 @@
+<div class="max-w-md mx-auto mt-10 p-6 border border-gray-200 rounded-lg shadow-xl">
+  <h2 class="text-2xl font-semibold mb-4 text-center">Registration</h2>
+
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+    <!-- Username -->
+    <div class="mb-4">
+      <label class="block mb-1 font-semibold">Username</label>
+      <input type="text" formControlName="username" class="w-full border p-2 rounded border-gray-300" />
+      <div *ngIf="registerForm.get('username')?.invalid && registerForm.get('username')?.touched" class="text-red-500 text-sm">
+        <div *ngIf="registerForm.get('username')?.errors?.['required']">Field is required.</div>
+        <div *ngIf="registerForm.get('username')?.errors?.['minlength']">Username must be between 2 and 40 characters.</div>
+      </div>
+    </div>
+
+    <!-- Password -->
+    <div class="mb-4">
+      <label class="block mb-1 font-semibold">Password</label>
+      <input type="password" formControlName="password" class="w-full border p-2 rounded border-gray-300" />
+      <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched" class="text-red-500 text-sm">
+        <div *ngIf="registerForm.get('password')?.errors?.['required']">Field is required.</div>
+        <div *ngIf="registerForm.get('password')?.errors?.['minlength']">Minimum 6 characters.</div>
+      </div>
+    </div>
+
+    <!-- Confirm Password -->
+    <div class="mb-4">
+      <label class="block mb-1 font-semibold">Confirm Password</label>
+      <input type="password" formControlName="confirmPassword" class="w-full border p-2 rounded border-gray-300" />
+      <div *ngIf="registerForm.errors?.['mismatch'] && registerForm.get('confirmPassword')?.touched" class="text-red-500 text-sm">
+        Passwords do not match.
+      </div>
+    </div>
+
+    <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 cursor-pointer">
+      Register
+    </button>
+
+    <div class="flex justify-center items-center mt-5">
+      <a href="" class="text-blue-500 font-medium">Login</a>
+    </div>
+  </form>
+</div>
