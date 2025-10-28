@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { UserModel } from '../models/user.model';
 import { UserRegisterModel } from '../models/user.register.model';
+import { UserLoginModel } from '../models/user.login';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,10 @@ export class AuthService {
 
   register(data: UserRegisterModel): Observable<UserModel> {
     return this.http.post<UserModel>(`${this.apiUrl}register`, data);
+  }
+
+  login(data: UserLoginModel): Observable<UserModel> {
+    return this.http.post<UserModel>(`${this.apiUrl}login`, data);
   }
 
   logout() {

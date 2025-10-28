@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
-import { UserRegisterModel } from '../../../models/user.register.model';
-import { AuthService } from '../../../services/auth.service';
+import { Router, RouterModule } from '@angular/router';
+import { UserRegisterModel } from '../../models/user.register.model';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule],
   templateUrl: './registration.component.html',
 })
 export class RegistrationComponent {
@@ -57,6 +57,7 @@ export class RegistrationComponent {
         localStorage.setItem('user', JSON.stringify(res));
       },
       error: (err) => {
+        console.error(err.error.error);
         alert("Sorry, something went wrong!");
       }
     });
