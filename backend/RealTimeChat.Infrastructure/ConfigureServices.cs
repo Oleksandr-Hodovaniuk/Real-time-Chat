@@ -4,6 +4,7 @@ using RealTimeChat.Application.Interfaces;
 using RealTimeChat.Infrastructure.Extensions;
 using RealTimeChat.Infrastructure.Persistence;
 using RealTimeChat.Infrastructure.Repositories;
+using RealTimeChat.Infrastructure.Services;
 
 namespace RealTimeChat.Infrastructure;
 
@@ -21,6 +22,10 @@ public static class ConfigureServices
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
         services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+        services.TextAnalyticsConfig();
+
+        services.AddScoped<ITextAnalyticsService, TextAnalyticsService>();
 
         return services;
     }

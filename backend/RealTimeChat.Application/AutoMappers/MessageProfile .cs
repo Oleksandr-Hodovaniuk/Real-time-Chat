@@ -27,6 +27,7 @@ internal class MappingProfile : Profile
             .ForMember(dest => dest.Text, opt =>
                 opt.MapFrom(src => src.Text))
             .ForMember(dest => dest.SentimentType, opt => opt.Ignore())
-            .ForMember(dest => dest.Created, opt =>opt.Ignore());
+            .ForMember(dest => dest.Created, opt =>
+                opt.MapFrom(src => DateTime.Now));
     }
 }
