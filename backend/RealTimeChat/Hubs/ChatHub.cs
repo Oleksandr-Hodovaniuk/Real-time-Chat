@@ -4,8 +4,6 @@ using RealTimeChat.Application.Dtos;
 using RealTimeChat.Application.Exceptions;
 using RealTimeChat.Application.Interfaces;
 using RealTimeChat.Domain.Entities;
-using RealTimeChat.Domain.Enums;
-using System.Globalization;
 
 namespace RealTimeChat.Hubs;
 

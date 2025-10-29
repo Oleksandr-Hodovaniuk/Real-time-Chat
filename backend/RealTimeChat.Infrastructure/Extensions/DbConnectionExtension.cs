@@ -9,15 +9,7 @@ public static class DbConnectionExtension
 {
     public static IServiceCollection AddSqlServerConnection(this IServiceCollection services, IConfiguration configuration)
     {
-        var localhost = "localhost";
-        var host = configuration["CHAT_DB_HOST"];
-        var port = configuration["CHAT_DB_PORT"];
-        var database = configuration["CHAT_DB_NAME"];
-        var username = configuration["CHAT_DB_USER"];
-        var password = configuration["CHAT_DB_PASSWORD"];
-
-        // For local development, override the host to localhost
-        var connectionString = $"Server={localhost},{port};Database={database};User Id={username};Password={password};TrustServerCertificate=True;";
+        var connectionString = configuration["CHAT_DB_CONNECTION_STRING"];
 
         services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(connectionString));
