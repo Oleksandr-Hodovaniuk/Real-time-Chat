@@ -5,14 +5,33 @@ import { environment } from '../../../../environments/environment';
 import { UserModel } from '../models/user.model';
 import { UserRegisterModel } from '../models/user.register.model';
 import { UserLoginModel } from '../models/user.login';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private apiUrl = environment.apiUrl + 'auth/';
+  private storageKey = environment.storageKey;
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router
+  ) {}
+
+  isLoggedIn(): boolean {
+    return !!localStorage.getItem(this.storageKey);
+  }
+
+  getUser(): UserModel | null {
+    const user = localStorage.getItem(this.storageKey);
+    return user ? JSON.parse(user) : null;
+  }
+  
+  logout() {
+    localStorage.removeItem(this.storageKey);
+    this.router.navigate(['/login']);
+  }
 
   register(data: UserRegisterModel): Observable<UserModel> {
     return this.http.post<UserModel>(`${this.apiUrl}register`, data);
@@ -20,9 +39,5 @@ export class AuthService {
 
   login(data: UserLoginModel): Observable<UserModel> {
     return this.http.post<UserModel>(`${this.apiUrl}login`, data);
-  }
-
-  logout() {
-    localStorage.removeItem('token');
   }
 }

@@ -18,7 +18,8 @@ export class RegistrationComponent {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private modalService: ModalService)
+    private modalService: ModalService,
+    private router: Router)
   {}
 
   ngOnInit() {
@@ -56,6 +57,7 @@ export class RegistrationComponent {
     this.authService.register(user).subscribe({
       next: (res) => {
         localStorage.setItem('user', JSON.stringify(res));
+        this.router.navigate(['/chat']);
       },
       error: (err) => {
         this.modalService.open('Registration Error', err.error.error || 'Sorry, something went wrong!');

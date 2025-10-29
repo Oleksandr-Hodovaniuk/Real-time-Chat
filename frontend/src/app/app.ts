@@ -1,13 +1,20 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router, RouterOutlet } from '@angular/router';
+import { AuthService } from './features/auth/services/auth.service';
 import { ModalComponent } from "./shared/components/modal.component";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, ModalComponent],
   templateUrl: './app.html',
-  styleUrl: './app.scss'
+  styleUrls: ['./app.scss'],
+  imports: [RouterOutlet, ModalComponent]
 })
-export class App {
-  protected title = 'frontend';
+export class App implements OnInit {
+  constructor(private authService: AuthService, private router: Router) {}
+
+  ngOnInit() {
+    if (this.authService.isLoggedIn()) {
+      this.router.navigate(['/chat']);
+    }
+  }
 }

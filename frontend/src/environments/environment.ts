@@ -1,3 +1,4 @@
 export const environment = {
-  apiUrl: "https://localhost:7058/api/"
+  apiUrl: "https://localhost:7058/api/",
+  storageKey: "user" 
 };

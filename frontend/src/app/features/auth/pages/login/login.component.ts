@@ -18,8 +18,9 @@ export class LoginComponent {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private modalService: ModalService)
-  {}
+    private modalService: ModalService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.loginForm = this.fb.group({
@@ -49,6 +50,7 @@ export class LoginComponent {
     this.authService.login(user).subscribe({
       next: (res) => {
         localStorage.setItem('user', JSON.stringify(res));
+        this.router.navigate(['/chat']);
       },
       error: (err) => {     
        if (err.status === 404 || err.status === 400) {

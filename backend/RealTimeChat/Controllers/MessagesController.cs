@@ -3,7 +3,7 @@ using RealTimeChat.Application.Messages.Queries;
 
 namespace RealTimeChat.Controllers;
 
-public class MessageController : BaseController
+public class MessagesController : BaseController
 {
     [HttpGet]
     public async Task<IActionResult> GetMessages(CancellationToken cancellationToken)

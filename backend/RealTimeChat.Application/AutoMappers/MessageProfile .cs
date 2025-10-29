@@ -10,6 +10,8 @@ internal class MappingProfile : Profile
     public MappingProfile()
     {
         CreateMap<Message, MessageDto>()
+            .ForMember(dest => dest.UserId, opt =>
+                opt.MapFrom(src => src.User.Id))
             .ForMember(dest => dest.Username, opt =>
                 opt.MapFrom(src => src.User.Username))
             .ForMember(dest => dest.Text, opt =>
