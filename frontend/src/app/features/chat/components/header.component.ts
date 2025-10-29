@@ -13,6 +13,6 @@ export class HeaderComponent {
   constructor(public authService: AuthService) {}
 
   ngOnInit() {
-    this.user = this.authService.getUser();
+    this.user = this.authService.getUserFromLocalStorage();
   }
 }

@@ -13,8 +13,18 @@ export class App implements OnInit {
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
-    if (this.authService.isLoggedIn()) {
-      this.router.navigate(['/chat']);
+    const user = this.authService.getUserFromLocalStorage();
+    if (user) {
+      this.authService.getUser(user.id).subscribe({
+        next: (res) => {
+          if (res) {
+            this.router.navigate(['/chat']);
+          }
+        },
+        error: () => {
+          this.router.navigate(['/login']);
+        }
+      });
     }
   }
 }

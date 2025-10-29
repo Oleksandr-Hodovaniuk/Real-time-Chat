@@ -1,4 +1,4 @@
 export interface ChatMessageModel {
-  id: string;
+  userId: string;
   text: string;
 }

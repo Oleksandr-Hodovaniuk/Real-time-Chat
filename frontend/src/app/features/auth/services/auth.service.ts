@@ -19,11 +19,7 @@ export class AuthService {
     private router: Router
   ) {}
 
-  isLoggedIn(): boolean {
-    return !!localStorage.getItem(this.storageKey);
-  }
-
-  getUser(): UserModel | null {
+  getUserFromLocalStorage(): UserModel | null {
     const user = localStorage.getItem(this.storageKey);
     return user ? JSON.parse(user) : null;
   }
@@ -31,6 +27,10 @@ export class AuthService {
   logout() {
     localStorage.removeItem(this.storageKey);
     this.router.navigate(['/login']);
+  }
+
+  getUser(data: string): Observable<UserModel> {
+    return this.http.get<UserModel>(`${this.apiUrl}${data}`);
   }
 
   register(data: UserRegisterModel): Observable<UserModel> {
