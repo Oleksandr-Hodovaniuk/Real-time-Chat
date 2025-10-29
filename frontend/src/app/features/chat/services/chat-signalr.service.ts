@@ -30,26 +30,41 @@ export class ChatSignalRService {
       .then(() => console.log('SignalR connected'))
       .catch(err => console.error(err));
 
-    // отримання історії
     this.chatService.getAllMessages().subscribe(msgs => {
       this.messagesSubject.next(msgs);
     });
 
-    // нові повідомлення через SignalR
+    // New message received
     this.hubConnection.on('ReceiveMessage', (msg: MessageModel) => {
       const current = this.messagesSubject.value;
       this.messagesSubject.next([...current, msg]);
     });
   }
 
-  sendMessage(message: MessageModel) {
-    if (this.hubConnection && this.hubConnection.state === signalR.HubConnectionState.Connected) {
-      this.hubConnection.invoke('SendMessage', message)
-        .catch(err => {
-          this.modalService.open('Send message error', err || 'Sorry, something went wrong!')
-        });
-    } else {
-      console.warn('SignalR not connected yet!');
+  async sendMessage(message: MessageModel) {
+    if (this.hubConnection.state !== signalR.HubConnectionState.Connected) {
+      console.warn('SignalR not connected yet, waiting...');
+      await this.ensureConnection();
+    }
+
+    this.hubConnection.invoke('SendMessage', message)
+      .catch(err => {
+        this.modalService.open('Send message error', err || 'Sorry, something went wrong!');
+      });
+  }
+
+private async ensureConnection(): Promise<void> {
+    if (this.hubConnection.state === signalR.HubConnectionState.Disconnected) {
+      try {
+        await this.hubConnection.start();
+        console.log('SignalR connected (reconnect)');
+      } catch (err) {
+        console.error('Failed to connect to SignalR:', err);
+      }
+    }
+
+    while (this.hubConnection.state !== signalR.HubConnectionState.Connected) {
+      await new Promise(r => setTimeout(r, 200));
     }
   }
 }

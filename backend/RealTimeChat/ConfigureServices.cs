@@ -10,9 +10,11 @@ public static class ConfigureServices
 
         services.AddSwaggerDocumentation();
 
-        services.AddSignalR();
+        services.AddSignalR().AddAzureSignalR();
 
         services.AddAppCors();
+
+        services.AddAzureSignalRService();
 
         return services;
     }
